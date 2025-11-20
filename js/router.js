@@ -1,14 +1,16 @@
-// Sistema de rotas SPA
 import { templates } from "./templates.js";
 
 export function initRouter() {
   const links = document.querySelectorAll("nav a");
   links.forEach(link => {
     link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = link.getAttribute("href").replace(".html", "");
-      loadPage(href);
-      window.history.pushState({}, "", link.getAttribute("href"));
+  
+      if (link.getAttribute("href").endsWith(".html")) {
+        e.preventDefault();
+        const href = link.getAttribute("href").replace(".html", "");
+        loadPage(href);
+        window.history.pushState({}, "", link.getAttribute("href"));
+      }
     });
   });
 

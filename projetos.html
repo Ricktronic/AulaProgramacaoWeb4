@@ -5,49 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projetos Sociais</title>
 
+ 
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
 
-  <script src="js/scripts.js" defer></script>
+  
+  <script type="module" src="js/app.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <button id="menu-toggle" aria-label="Abrir menu">☰</button>
+    <div class="header-actions">
+      <button id="menu-toggle"
+              aria-label="Abrir menu"
+              aria-expanded="false"
+              aria-controls="main-nav">☰</button>
+
+      <div class="accessibility-actions">
+        <button id="toggle-dark" aria-pressed="false">🌙 Modo Escuro</button>
+        <button id="toggle-contrast" aria-pressed="false">🔳 Alto Contraste</button>
+      </div>
+    </div>
+
     <nav id="main-nav" aria-label="Navegação principal">
       <ul class="nav-list">
         <li><a href="index.html">Início</a></li>
         <li class="has-submenu">
-          <a href="projetos.html">Projetos</a>
-          <ul class="submenu">
+          <a href="projetos.html" aria-haspopup="true" aria-expanded="false">Projetos</a>
+          <ul class="submenu" aria-label="Submenu Projetos" aria-hidden="true">
             <li><a href="#voluntariado">Voluntariado</a></li>
             <li><a href="#doacoes">Doações</a></li>
           </ul>
         </li>
         <li class="has-submenu">
-          <a href="cadastro.html">Cadastro</a>
-          <ul class="submenu">
+          <a href="cadastro.html" aria-haspopup="true" aria-expanded="false">Cadastro</a>
+          <ul class="submenu" aria-label="Submenu Cadastro" aria-hidden="true">
             <li><a href="cadastro.html">Novo voluntário</a></li>
             <li><a href="cadastro.html">Atualizar dados</a></li>
           </ul>
         </li>
       </ul>
     </nav>
+
     <h1>Projetos Sociais</h1>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
     <article class="card" id="voluntariado">
       <h2>Voluntariado</h2>
       <p>Participe dos nossos projetos como voluntário e faça a diferença!</p>
 
       <figure class="media">
-        <img src="imagens/projetos/projetos.webp" alt="Voluntários em ação" />
+        <img src="imagens/projetos/projetos.webp"
+             alt="Voluntários em ação"
+             loading="lazy"
+             width="640"
+             height="360" />
         <figcaption>Voluntários em ação durante campanha comunitária.</figcaption>
       </figure>
 
-      <span class="badge">Ação Comunitária</span>
+      <span class="badge" aria-label="Projeto de ação comunitária">Ação Comunitária</span>
     </article>
 
     <article class="card" id="doacoes">
@@ -55,11 +73,15 @@
       <p>Você pode doar alimentos, roupas ou contribuir financeiramente.</p>
 
       <figure class="media">
-        <img src="imagens/doacoes.jpg" alt="Doações sendo entregues" width="440" height="220"/>
+        <img src="imagens/doacoes.jpg"
+             alt="Doações sendo entregues"
+             width="440"
+             height="220"
+             loading="lazy"/>
         <figcaption>Entrega de doações para famílias carentes.</figcaption>
       </figure>
 
-      <span class="badge">Campanha Ativa</span>
+      <span class="badge" aria-label="Campanha ativa de doações">Campanha Ativa</span>
     </article>
   </main>
 
