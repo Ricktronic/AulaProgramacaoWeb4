@@ -36,3 +36,28 @@ body {
   color: var(--color-neutral-900);
   background-color: var(--color-neutral-100);
 }
+/* Foco visível */
+:focus {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Modo escuro */
+body.dark-theme {
+  background-color: #121212;
+  color: #eaeaea;
+}
+
+body.dark-theme a {
+  color: #80cbc4;
+}
+
+/* Alto contraste */
+body.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+
+body.high-contrast a {
+  color: #ff0;
+}
