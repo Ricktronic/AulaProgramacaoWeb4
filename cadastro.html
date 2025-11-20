@@ -4,49 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro</title>
-  
+
+  <!-- CSS existente -->
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
-  
-  <script src="js/scripts.js" defer></script>
+
+  <!-- JS modular (SPA, acessibilidade, validação) -->
+  <script type="module" src="js/app.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <button id="menu-toggle" aria-label="Abrir menu">☰</button>
+    <div class="header-actions">
+      <button id="menu-toggle"
+              aria-label="Abrir menu"
+              aria-expanded="false"
+              aria-controls="main-nav">☰</button>
+
+      <div class="accessibility-actions">
+        <button id="toggle-dark" aria-pressed="false">🌙 Modo Escuro</button>
+        <button id="toggle-contrast" aria-pressed="false">🔳 Alto Contraste</button>
+      </div>
+    </div>
+
     <nav id="main-nav" aria-label="Navegação principal">
       <ul class="nav-list">
         <li><a href="index.html">Início</a></li>
         <li class="has-submenu">
-          <a href="projetos.html">Projetos</a>
-          <ul class="submenu">
+          <a href="projetos.html" aria-haspopup="true" aria-expanded="false">Projetos</a>
+          <ul class="submenu" aria-label="Submenu Projetos" aria-hidden="true">
             <li><a href="projetos.html#voluntariado">Voluntariado</a></li>
             <li><a href="projetos.html#doacoes">Doações</a></li>
           </ul>
         </li>
         <li class="has-submenu">
-          <a href="cadastro.html">Cadastro</a>
-          <ul class="submenu">
+          <a href="cadastro.html" aria-haspopup="true" aria-expanded="false">Cadastro</a>
+          <ul class="submenu" aria-label="Submenu Cadastro" aria-hidden="true">
             <li><a href="cadastro.html">Novo voluntário</a></li>
             <li><a href="cadastro.html">Atualizar dados</a></li>
           </ul>
         </li>
       </ul>
     </nav>
+
     <h1>Cadastro de Voluntário</h1>
   </header>
 
-  <main>
-    <form novalidate>
+  <main id="conteudo" tabindex="-1">
+    <form id="cadastroForm" novalidate aria-labelledby="formTitle">
       <fieldset>
-        <legend>Informações Pessoais</legend>
+        <legend id="formTitle">Informações Pessoais</legend>
 
         <label for="nome">Nome Completo:</label>
-        <input type="text" id="nome" name="nome" required placeholder="Seu nome" />
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" aria-required="true" />
 
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" />
+        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" aria-required="true" />
 
         <label for="cpf">CPF:</label>
         <input
@@ -57,7 +71,10 @@
           maxlength="14"
           pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
           placeholder="000.000.000-00"
+          aria-required="true"
+          aria-describedby="cpfHelp"
         />
+        <small id="cpfHelp">Formato: 000.000.000-00</small>
 
         <label for="telefone">Telefone:</label>
         <input
@@ -68,17 +85,20 @@
           maxlength="15"
           pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
           placeholder="(99) 99999-9999"
+          aria-required="true"
+          aria-describedby="telHelp"
         />
+        <small id="telHelp">Exemplo: (98) 99999-9999</small>
 
         <label for="nascimento">Data de Nascimento:</label>
-        <input type="date" id="nascimento" name="nascimento" required />
+        <input type="date" id="nascimento" name="nascimento" required aria-required="true" />
       </fieldset>
 
       <fieldset>
         <legend>Endereço</legend>
 
         <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" name="endereco" required placeholder="Rua, número, bairro" />
+        <input type="text" id="endereco" name="endereco" required placeholder="Rua, número, bairro" aria-required="true" />
 
         <label for="cep">CEP:</label>
         <input
@@ -89,13 +109,16 @@
           maxlength="9"
           pattern="\d{5}-\d{3}"
           placeholder="00000-000"
+          aria-required="true"
+          aria-describedby="cepHelp"
         />
+        <small id="cepHelp">Formato: 00000-000</small>
 
         <label for="cidade">Cidade:</label>
-        <input type="text" id="cidade" name="cidade" required placeholder="Sua cidade" />
+        <input type="text" id="cidade" name="cidade" required placeholder="Sua cidade" aria-required="true" />
 
         <label for="estado">Estado:</label>
-        <select id="estado" name="estado" required>
+        <select id="estado" name="estado" required aria-required="true">
           <option value="">Selecione</option>
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
@@ -124,16 +147,18 @@
           <option value="SP">São Paulo</option>
           <option value="SE">Sergipe</option>
           <option value="TO">Tocantins</option>
-          
         </select>
       </fieldset>
 
       <button type="submit">Enviar</button>
     </form>
 
-  
-    <div class="alert" role="alert">⚠️ Preencha todos os campos obrigatórios corretamente.</div>
-    <div class="toast" role="status">✅ Cadastro realizado com sucesso!</div>
+    <div class="alert" role="alert" aria-live="assertive" hidden>
+      ⚠️ Preencha todos os campos obrigatórios corretamente.
+    </div>
+    <div class="toast" role="status" aria-live="polite" hidden>
+      ✅ Cadastro realizado com sucesso!
+    </div>
   </main>
 
   <footer>
